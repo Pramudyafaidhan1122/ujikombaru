@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class cekadmin
+class PetugasAuthenticate
 {
     /**
      * Handle an incoming request.
@@ -15,11 +16,17 @@ class cekadmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $session = Auth::guard('admin')->user();
-        if($session){
+        // return $next($request);
+
+        // var_dump(Auth::guard('petugas')->check());
+
+        // die();
+
+        if(Auth::guard('petugas')->check()){
             return $next($request);
-        }else{
-            return redirect ("/login/admin");
         }
+
+        return redirect('petugas/login');
+
     }
 }

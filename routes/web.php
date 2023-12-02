@@ -1,37 +1,26 @@
 <?php
 
+use App\Http\Controllers\halamanController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PetugasController;
-use App\Http\Controllers\adminController;
-use App\Http\Controllers\KasirController;
+use App\Http\Controllers\loginController;
+use PharIo\Manifest\AuthorElementCollection;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/login',[PetugasController::class,'login'])->name('login');
-Route::post('/login',[PetugasController::class,'proses_login']);
-Route::get('/logout',[PetugasController::class,'logout']);
-Route::get('/tambah-petugas',[PetugasController::class,'tbuat']);
-Route::post('/tambah-petugas',[PetugasController::class,'buat_akun']);
-
-Route::get('/login/admin',[adminController::class,'index']);
-Route::post('/login/admin',[adminController::class,'proses_login']);
-Route::get('/tampilan/admin',[adminController::class,'tampilan_admin']);
-Route::post('/tambah-admin',[adminController::class,'buat_akun']);
-Route::get('/tambah-admin',[adminController::class, 'tbuat']);
-
-Route::get('/kasir', [KasirController::class, 'index']);
-Route::get('/kasir/create', [KasirController::class, 'create']);
-Route::post('/kasir/store', [KasirController::class, 'store']);
-Route::get('/kasir/edit/{id}', [KasirController::class, 'edit']);
-Route::post('/kasir/update/{id}', [KasirController::class, 'update']);
-Route::get('/kasir/destroy/{id}', [KasirController::class, 'destroy']);
-
-Route::get('/nav', function () {
-    return view('layout.navbar');
-});
-
+Route::get('login', [loginController::class, 'log']);
+Route::get('logout', [loginController::class, 'logout']);
+Route::get('register', [loginController::class, 'register']);
+Route::get('home', [halamanController::class, 'home']);
